@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="accent">#FF5722</color>
+    <color name="accent_light">#FFCCBC</color>
+    <color name="accent_dark">#E64A19</color>
+    <color name="grey">#9E9E9E</color>
+    <color name="grey_dark">#616161</color>
+    <color name="light_blue" >#18B4ED</color>
+    <color name="deep_blue">#495dff</color>
+    <color name="light_grey">#EBECEA</color>
+    <color name="deep_grey">#BBB8B3</color>
+    <color name="green">#aa86D26E</color>
+    <color name="deep_green">#aa985224</color>
+    <color name="startColor">#ACE7EF</color>
+    <color name="centerColor">#C7E0DC</color>
+    <color name="endColor">#E8D9C6</color>
+    <color name="black">#000000</color>
+    <color name="btn_activity">#ffc107</color>
+    <color name="black_semi_transparent">#B2000000</color>
+    <color name="background">#e5e5e5</color>
+    <color name="half_black">#808080</color>
+    <color name="white">#fafafa</color>
+    <color name="white_pressed">#f1f1f1</color>
+    <color name="pink">#e91e63</color>
+    <color name="pink_pressed">#ec407a</color>
+    <color name="blue_semi_transparent">#805677fc</color>
+    <color name="blue_semi_transparent_pressed">#80738ffe</color>
+</resources>

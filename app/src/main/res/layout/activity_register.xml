@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+    <ImageView
+        android:id="@+id/registerUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/login"
+        android:src="@mipmap/user_qq" />
+
+    <LinearLayout
+        android:id="@+id/reg_linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/registerUser"
+        android:layout_marginTop="20dp"
+        android:background="#ffffff"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/regEmail_relayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/registerId"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:background="@null"
+                android:hint="@string/reg_id_hint"
+                android:textColorHint="#CDCDC1"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/regIdText_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:text="@string/id_true"
+                android:textColor="#ff0000"
+                android:visibility="invisible" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/registerline2"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#D7D7D7"
+            android:orientation="vertical"></LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/regID_relayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/registerName"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:background="@null"
+                android:hint="@string/reg_Name_hint"
+                android:textColorHint="#CDCDC1"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/regNameText_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:text="@string/id_true"
+                android:textColor="#ff0000"
+                android:visibility="invisible" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/registerline"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#D7D7D7"
+            android:orientation="vertical"></LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/regPWD_relayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/registerPWD"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="20dp"
+                android:background="@null"
+                android:hint="@string/reg_pwd_hint"
+                android:inputType="textPassword"
+                android:textColorHint="#CDCDC1"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/regPwdText_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:text="@string/id_true"
+                android:textColor="#ff0000"
+                android:visibility="invisible" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/registerline1"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#D7D7D7"
+            android:orientation="vertical"></LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/conPWD_relayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/confirmPWD"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="20dp"
+                android:background="@null"
+                android:hint="@string/truepassword"
+                android:inputType="textPassword"
+                android:textColorHint="#CDCDC1"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/confirmPWD_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:text="@string/pstrue"
+                android:textColor="#ff0000"
+                android:visibility="invisible" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/registerBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/reg_linearlayout"
+        android:layout_margin="20dp"
+        android:background="@drawable/btn_bg"
+        android:includeFontPadding="false"
+        android:text="@string/register"
+        android:textColor="#ffffff"
+        android:textSize="16sp" />
+
+</RelativeLayout>
