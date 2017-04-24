@@ -12,14 +12,44 @@ public class content_Info {
     private String user_name;
     private String location_name;
     private String content;
+    private String trace_id;
     private List<comment_Info> comment_list;
+    private int ResourceId;
 
-    /*public content_Info(String user_name,List<comment_Info> comment_list) {
-        this.user_name = user_name;
-        this.content = content;
-        this.location_name = location_name;
-        this.comment_list = comment_list;
-    }*/
+    private boolean likeFocus;
+    private int likeNum;
+
+    public void setResourceId(int resourceId) {
+        ResourceId = resourceId;
+    }
+
+    public int getResourceId() {
+        return ResourceId;
+    }
+
+    public boolean isLikeFocus() {
+        return likeFocus;
+    }
+
+    public void setLikeFocus(boolean likeFocus) {
+        this.likeFocus = likeFocus;
+    }
+
+    public void setLikeNum(int likeNum) {
+        this.likeNum = likeNum;
+    }
+
+    public String getTrace_id() {
+        return trace_id;
+    }
+
+    public void setTrace_id(String trace_id) {
+        this.trace_id = trace_id;
+    }
+
+    public int getLikeNum() {
+        return likeNum;
+    }
 
     public void setUser_name(String user_name) {
         this.user_name = user_name;

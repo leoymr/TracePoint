@@ -28,7 +28,6 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'com.shamanland:fonticon:0.1.8'
     compile 'com.android.support:design:25.1.1'
-    compile 'com.wx.goodview:goodview:1.0.0'
-    compile 'com.getbase:floatingactionbutton:1.10.1'
+    compile 'com.android.support:recyclerview-v7:25.1.0'
     testCompile 'junit:junit:4.12'
 }

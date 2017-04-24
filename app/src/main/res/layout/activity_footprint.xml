@@ -1,94 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/footprint_relayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".mapActivity">
 
-    <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/footprint_coorlayout"
+
+    <LinearLayout
+        android:id="@+id/footprint_LinearLayout"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:focusable="false"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/footprint_LinearLayout"
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/bmapView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="false"
-            android:orientation="vertical">
+            android:layout_height="270dp"
+            android:clickable="false" />
 
-            <com.baidu.mapapi.map.MapView
-                android:id="@+id/bmapView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="false" />
-
-        </LinearLayout>
-
-        <com.getbase.floatingactionbutton.FloatingActionsMenu
-            android:id="@+id/btn_capture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="16dp"
-            fab:fab_addButtonColorNormal="@color/accent"
-            fab:fab_addButtonColorPressed="@color/accent_dark"
-            fab:fab_addButtonStrokeVisible="false"
-            fab:fab_menu_icon="@mipmap/refresh">
-
-            <com.getbase.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btn_trash"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                fab:fab_colorNormal="@color/grey"
-                fab:fab_colorPressed="@color/grey_dark"
-                fab:fab_icon="@mipmap/addmore" />
-
-            <com.getbase.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btn_accept"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                fab:fab_colorNormal="@color/accent"
-                fab:fab_colorPressed="@color/accent_dark"
-                fab:fab_icon="@mipmap/checked" />
-
-
-        </com.getbase.floatingactionbutton.FloatingActionsMenu>
-
-
-    </android.support.design.widget.CoordinatorLayout>
-
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/listview_LinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/footprint_coorlayout"
+        android:layout_margin="10dp"
+        android:layout_below="@id/footprint_LinearLayout"
         android:orientation="vertical">
 
         <ListView
             android:id="@+id/footprint_Listview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></ListView>
-
-        <EditText
-            android:id="@+id/fp_comment_edt"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:background="@drawable/edittext_bg"
-            android:focusable="false"
-            android:hint="Type Comments"
-            android:padding="7dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/deep_grey" />
+            android:clickable="true"
+            android:focusable="true"
+            ></ListView>
+
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/refresh"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:scaleType="fitXY"
+        android:layout_below="@id/footprint_LinearLayout"
+        android:layout_marginTop="-30dp"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/refresh"
+        android:background="#00000000"/>
+
+    <ImageView
+        android:id="@+id/addmore"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:scaleType="fitXY"
+        android:layout_below="@id/footprint_LinearLayout"
+        android:layout_marginTop="-30dp"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/addmore"
+        android:background="#00000000"/>
+
+    <ImageView
+        android:id="@+id/checked"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:scaleType="fitXY"
+        android:layout_below="@id/footprint_LinearLayout"
+        android:layout_marginTop="-30dp"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/checked"
+        android:background="#00000000"/>
+
+    <ImageView
+        android:id="@+id/center"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:scaleType="fitXY"
+        android:layout_below="@id/footprint_LinearLayout"
+        android:layout_marginTop="-35dp"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/ultraball"
+        android:background="#00000000"/>
 
 </RelativeLayout>

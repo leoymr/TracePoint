@@ -9,11 +9,6 @@ public class comment_Info {
     private String user_name;
     private String comments;
 
-    /*public comment_Info(String user_name,String comments) {
-        this.user_name = user_name;
-        this.comments = comments;
-    }*/
-
     public String getUser_name() {
         return user_name;
     }

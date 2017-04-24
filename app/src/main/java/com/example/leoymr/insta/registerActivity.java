@@ -47,6 +47,7 @@ public class registerActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setTitle("注册");
 
         register = (Button) findViewById(R.id.registerBtn);
         editText_confirmPWD = (EditText) findViewById(R.id.confirmPWD);
@@ -130,7 +131,7 @@ public class registerActivity extends AppCompatActivity implements View.OnClickL
                     .add("user_name", user_name)
                     .add("user_pw", user_pw)
                     .build();
-            String url = "http://54.254.206.29:5000/api/register";
+            String url = "http://54.254.206.29/api/register";
             OkHttpClient client = new OkHttpClient();
             Log.d(POST, url);
             Request request = new Request.Builder()

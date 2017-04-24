@@ -8,12 +8,13 @@
 
     <ImageView
         android:id="@+id/loginUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:contentDescription="@string/login"
-        android:src="@mipmap/user_qq" />
+        android:scaleType="fitXY"
+        android:src="@mipmap/icon" />
 
     <LinearLayout
         android:id="@+id/login_linearlayout"
@@ -61,7 +62,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/btn_bg"
+        android:background="@drawable/btn_bg_logout"
         android:includeFontPadding="false"
         android:text="@string/login"
         android:textColor="#ffffff"
@@ -78,14 +79,14 @@
             android:id="@+id/layout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignParentLeft="true">
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal">
 
             <CheckBox
                 android:id="@+id/remember_pwd"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -99,11 +100,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:layout_centerVertical="true"
             android:background="@null"
             android:includeFontPadding="false"
             android:text="@string/register"
-            android:textColor="#00AFEF"
-            android:textSize="14sp" />
+            android:textColor="@color/grey_dark"
+            android:textSize="17sp" />
     </RelativeLayout>
 
 

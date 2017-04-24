@@ -1,20 +1,17 @@
 package com.example.leoymr.insta;
 
-import android.annotation.TargetApi;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,19 +20,17 @@ import android.widget.Toast;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
-import com.example.leoymr.insta.Data.footprint_Info.comment_Info;
-import com.example.leoymr.insta.Data.footprint_Info.content_Info;
 import com.example.leoymr.insta.GeoHash.geoHash;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -52,9 +47,8 @@ import okhttp3.Response;
  */
 
 public class publishActivity extends AppCompatActivity implements View.OnClickListener {
-    public static final int CHOOSE_PHOTO = 2;
     private static final String TAG = "publishActivity";
-    private static final String POST = "post_request";
+    private static final String POST = "post trace point";
 
     public LocationClient mLocationClient;
 
@@ -75,19 +69,25 @@ public class publishActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_publish);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setTitle("发布足迹");
+
 
         //地理位置服务
         mLocationClient = new LocationClient(getApplicationContext());
         mLocationClient.registerLocationListener(new MyLocationListenerPublish());
 
         SDKInitializer.initialize(getApplicationContext());
-        setContentView(R.layout.activity_footprint);
+        setContentView(R.layout.activity_publish);
 
         //初始化百度地图view
         pub_mapView = (MapView) findViewById(R.id.publish_bmapView);
         pub_baiduMap = pub_mapView.getMap();
+        pub_mapView.removeViewAt(1);
         pub_baiduMap.setMyLocationEnabled(true);
+
+        UiSettings uiSettings = pub_baiduMap.getUiSettings();
+        uiSettings.setAllGesturesEnabled(false);
 
         sendContent = (Button) findViewById(R.id.publish_send);
         editText_content = (EditText) findViewById(R.id.publish_content);
@@ -129,9 +129,9 @@ public class publishActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        pub_mapView.onPause();
+    protected void onRestart() {
+        super.onRestart();
+        pub_mapView.onResume();
     }
 
     @Override
@@ -140,20 +140,32 @@ public class publishActivity extends AppCompatActivity implements View.OnClickLi
         pub_mapView.onDestroy();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Log.d("返回成功", "onOptionsItemSelected: ");
+                Intent intent2 = new Intent(publishActivity.this, mapActivity.class);
+                if (!user_id_intent.equals("")) {
+                    Log.d("user_id", user_id_intent);
+                    intent2.putExtra("user_id", user_id_intent);
+                }
+                startActivity(intent2);
+                break;
+        }
+        return true;
+    }
 
     /**
      * 百度地图方法类集合
      */
-
     private void navigateTo(BDLocation location) {
-        if (pub_isFirstLocate) {
-            LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
-            MapStatusUpdate update = MapStatusUpdateFactory.newLatLng(ll);
-            pub_baiduMap.animateMapStatus(update);
-            update = MapStatusUpdateFactory.zoomTo(16f);
-            pub_baiduMap.animateMapStatus(update);
-            pub_isFirstLocate = false;
-        }
+        LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
+        MapStatusUpdate update = MapStatusUpdateFactory.newLatLng(ll);
+        pub_baiduMap.animateMapStatus(update);
+        update = MapStatusUpdateFactory.zoomTo(16f);
+        pub_baiduMap.animateMapStatus(update);
+        pub_isFirstLocate = false;
 
         MyLocationData.Builder locationBuiler = new MyLocationData.Builder();
         //获取纬度
@@ -170,13 +182,20 @@ public class publishActivity extends AppCompatActivity implements View.OnClickLi
 
         //获取当前位置的Geohash
         geoH = new geoHash(latitude, longtitude);  //先输入纬度，再输入经度
-        Log.d("当前位置的geohash", geoH.getGeoHashBase32());
+        //Log.d("当前位置的geohash", geoH.getGeoHashBase32());
         geohash = geoH.getGeoHashBase32();
 
     }
 
     private void requestLocation() {
+        initLocation();
         mLocationClient.start();
+    }
+
+    private void initLocation() {
+        LocationClientOption option = new LocationClientOption();
+        option.setScanSpan(5000);
+        mLocationClient.setLocOption(option);
     }
 
     public class MyLocationListenerPublish implements BDLocationListener {
@@ -225,14 +244,23 @@ public class publishActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.publish_send:
                 if (msg.equals("")) {
-                    Toast.makeText(getApplicationContext(), "发送不能为空 !!!", Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                    dialog.setTitle("发送不能为空 !!!");
+                    dialog.setCancelable(false);
+                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    dialog.show();
                 } else {
-                    new mapAsyncTask().execute(msg);
+                    new publishAsyncTask().execute(msg);
                     Log.d("内容", msg);
                 }
                 Intent intent2 = new Intent(publishActivity.this, mapActivity.class);
                 if (!user_id_intent.equals("")) {
-                    Log.d("user_id", user_id_intent);
+                    Log.d("publish_user_id", user_id_intent);
                     intent2.putExtra("user_id", user_id_intent);
                 }
                 startActivity(intent2);
@@ -240,7 +268,7 @@ public class publishActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    class mapAsyncTask extends AsyncTask<String, Void, JSONObject> {
+    class publishAsyncTask extends AsyncTask<String, Void, JSONObject> {
 
         @Override
         protected JSONObject doInBackground(String... params) {
@@ -270,7 +298,7 @@ public class publishActivity extends AppCompatActivity implements View.OnClickLi
                     .add("latitude", String.valueOf(latitude))
                     .add("geohash", geohash)
                     .build();
-            String url = "http://54.254.206.29:5000/api/publish_trace";
+            String url = "http://54.254.206.29/api/publish_trace";
             OkHttpClient client = new OkHttpClient();
             Log.d(POST, url);
             Request request = new Request.Builder()
@@ -291,59 +319,4 @@ public class publishActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    private void openAlbum() {
-        Intent intent = new Intent("android.intent.action.GET_CONTENT");
-        intent.setType("image/*");
-        startActivityForResult(intent, CHOOSE_PHOTO);
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case CHOOSE_PHOTO:
-                if (resultCode == RESULT_OK) {
-                    //判断手机版本号
-                    if (Build.VERSION.SDK_INT >= 19) {
-                        //4.4及以上系统使用的方法
-                        handleImageOnKitKat(data);
-                    } else {
-                        //4.4以下系统使用的方法
-                        //handleImageBeforeKitKat(data);
-                    }
-                }
-                break;
-            default:
-                break;
-        }
-    }
-
-    @TargetApi(19)
-    private void handleImageOnKitKat(Intent data) {
-        String imagePath = null;
-        Uri uri = data.getData();
-        if (DocumentsContract.isDocumentUri(this, uri)) {
-            String docId = DocumentsContract.getDocumentId(uri);
-            if ("com.android.providers.media.documents".equals(uri.getAuthority())) {
-                String id = docId.split(":")[1];
-                String selection = MediaStore.Images.Media._ID + "=" + id;
-                imagePath = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection);
-            } else if ("com.android.providers.downloads.documents".equals(uri.getAuthority())) {
-
-            }
-        }
-    }
-
-    private String getImagePath(Uri uri, String selection) {
-        String path = null;
-        Cursor cursor = getContentResolver().query(uri, null, selection, null, null);
-        if (cursor != null) {
-            if (cursor.moveToFirst()) {
-                path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-            }
-            cursor.close();
-        }
-        return path;
-    }
 }

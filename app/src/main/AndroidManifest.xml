@@ -28,13 +28,13 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="kRH8IneVSizyVVdhqMIXvLpUqyezqgyb"></meta-data>
+            android:value="cqFXLsyRQD1fkwTwaLpIg3CZzZUIUfyZ"></meta-data>
 
         <activity android:name=".loginActivity">
             <intent-filter>
@@ -52,24 +52,60 @@
                 android:value=".loginActivity"></meta-data>
         </activity>
 
-        <activity
-            android:name=".mapActivity"
-            android:parentActivityName=".loginActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".loginActivity"></meta-data>
+        <activity android:name=".mapActivity">
+
         </activity>
 
         <activity
             android:name=".publishActivity"
-            android:parentActivityName=".loginActivity">
+            android:parentActivityName=".mapActivity">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".loginActivity"></meta-data>
+                android:value=".mapActivity"></meta-data>
+        </activity>
+        <activity
+            android:name=".personActivity"
+            android:parentActivityName=".mapActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".mapActivity"></meta-data>
         </activity>
 
-        <activity android:name=".tabViewActivity"></activity>
+        <activity
+            android:name=".commentActivity"
+            android:parentActivityName=".mapActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".mapActivity"></meta-data>
+        </activity>
+
+        <activity
+            android:name=".changeHeadActivity"
+            android:parentActivityName=".personActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".personActivity"></meta-data>
+
+        </activity>
+        <activity
+            android:name=".albumActivity"
+            android:parentActivityName=".personActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".personActivity"></meta-data>
+        </activity>
+
+        <activity
+            android:name=".changeUserNameActivity"
+            android:parentActivityName=".personActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".personActivity"></meta-data>
+        </activity>
 
         <service
             android:name="com.baidu.location.f"

@@ -13,8 +13,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.regex.Matcher;
@@ -49,6 +47,9 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        setTitle("登录");
+
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -140,7 +141,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             JSONObject json = null;
             String url = null;
             if (user_email != null) {
-                url = String.format("http://54.254.206.29:5000/api/login?%s&%s", "user_email=" + user_email, "user_pw=" + user_pw);
+                url = String.format("http://54.254.206.29/api/login?%s&%s", "user_email=" + user_email, "user_pw=" + user_pw);
             }
 
             OkHttpClient client = new OkHttpClient();

@@ -1,10 +1,6 @@
 package com.example.leoymr.insta.Adapter;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.leoymr.insta.Data.footprint_Info.AnimationTools;
 import com.example.leoymr.insta.Data.footprint_Info.content_Info;
 import com.example.leoymr.insta.Layout.CusListView;
 import com.example.leoymr.insta.R;
@@ -22,15 +16,14 @@ import com.example.leoymr.insta.R;
 import java.util.List;
 
 /**
- * Created by leoymr on 15/4/17.
+ * Created by leoymr on 24/4/17.
  */
 
-public class CommentAdapter extends BaseAdapter {
-
+public class AlbumAdapter extends BaseAdapter {
     private Context context;
     private List<content_Info> list;
 
-    public CommentAdapter(Context context, List<content_Info> list) {
+    public AlbumAdapter(Context context, List<content_Info> list) {
         this.context = context;
         this.list = list;
     }
@@ -54,27 +47,29 @@ public class CommentAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
 
         if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.content_listview, viewGroup, false);
+            view = LayoutInflater.from(context).inflate(R.layout.item_trace_point, viewGroup, false);
         }
         content_Info bean = list.get(i);
 
-        TextView tv_userName = ViewHolder.get(view, R.id.fp_user_name);
-        TextView tv_content = ViewHolder.get(view, R.id.fp_content_text);
-        TextView tv_dateTime = ViewHolder.get(view, R.id.fp_time);
-        ImageView imageView_head = ViewHolder.get(view,R.id.fp_user_img);
-        CusListView listView = ViewHolder.get(view, R.id.fp_comment_listview);
+        TextView tv_userName = ViewHolder.get(view, R.id.album_user_name);
+        TextView tv_content = ViewHolder.get(view, R.id.album_content_text);
+        TextView tv_dateTime = ViewHolder.get(view, R.id.album_time);
+        ImageView imageView_head = ViewHolder.get(view, R.id.album_user_img);
+        CusListView listView = ViewHolder.get(view, R.id.album_comment_listview);
 
-        ImageView btnLike = ViewHolder.get(view, R.id.good);
+        ImageView btnLike = ViewHolder.get(view, R.id.album_like);
 
-        TextView LikeNum = ViewHolder.get(view, R.id.like_num);
+        TextView LikeNum = ViewHolder.get(view, R.id.album_like_num);
 
-        LinearLayout com = ViewHolder.get(view, R.id.comment_Linearlayout);
+        LinearLayout com = ViewHolder.get(view, R.id.album_comment_Linearlayout);
 
         content_Info item = getItem(i);
         imageView_head.setImageResource(item.getResourceId());
+
         tv_userName.setText(item.getUser_name());
         tv_content.setText(item.getContent());
         tv_dateTime.setText(item.getLocation_name());
+
         if (item.getComment_list().isEmpty()) {
             com.setVisibility(View.GONE);
         } else {
@@ -89,6 +84,4 @@ public class CommentAdapter extends BaseAdapter {
 
         return view;
     }
-
-
 }

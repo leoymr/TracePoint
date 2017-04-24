@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_changename"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerVertical="true"
+    android:orientation="horizontal"
+    android:background="@color/white">
+
+    <EditText
+        android:id="@+id/text_name"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_weight="1"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_bg"
+        android:hint="输入新的用户名"
+        android:textSize="15dp"/>
+
+    <ImageButton
+        android:id="@+id/confirm"
+        android:layout_marginRight="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:src="@mipmap/confirm"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"/>
+
+
+
+</LinearLayout>
