@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "523188355186",
+    "firebase_url": "https://tracepoint-1a474.firebaseio.com",
+    "project_id": "tracepoint-1a474",
+    "storage_bucket": "tracepoint-1a474.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:523188355186:android:8082b83650daaeaa",
+        "android_client_info": {
+          "package_name": "com.example.leoymr.insta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "523188355186-baikvp6thv2gdodnel2pitp3lvltd4t9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTNzlv4x08hbrUeABmHd5z5pzdoxgCnPU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

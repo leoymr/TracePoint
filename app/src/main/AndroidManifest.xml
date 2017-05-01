@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.leoymr.insta">
+    package="com.iems5722.group6.insta">
 
     <!-- 这个权限用于进行网络定位-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
@@ -28,15 +28,17 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/icon"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="cqFXLsyRQD1fkwTwaLpIg3CZzZUIUfyZ"></meta-data>
+            android:value="sfGDf9Mm9KBazn7UIV8sGbKfpaA6BQg3"></meta-data>
 
-        <activity android:name=".loginActivity">
+        <activity
+            android:name=".loginActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,7 +48,8 @@
         </activity>
         <activity
             android:name=".registerActivity"
-            android:parentActivityName=".loginActivity">
+            android:parentActivityName=".loginActivity"
+            android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".loginActivity"></meta-data>
@@ -58,7 +61,8 @@
 
         <activity
             android:name=".publishActivity"
-            android:parentActivityName=".mapActivity">
+            android:parentActivityName=".mapActivity"
+            android:windowSoftInputMode="adjustPan">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -110,7 +114,24 @@
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"></service>
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2"></action>
+            </intent-filter>
+        </service>
+
+        <service android:name=".FirebaseService.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <service android:name=".FirebaseService.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

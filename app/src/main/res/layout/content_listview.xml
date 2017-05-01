@@ -64,14 +64,14 @@
                 android:visibility="gone"
                 android:orientation="vertical">
 
-                <com.example.leoymr.insta.Layout.CusListView
+                <com.iems5722.group6.insta.Layout.CusListView
                     android:id="@+id/fp_comment_listview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusableInTouchMode="true"
                     android:stackFromBottom="true"
-                    android:transcriptMode="alwaysScroll"></com.example.leoymr.insta.Layout.CusListView>
+                    android:transcriptMode="alwaysScroll"></com.iems5722.group6.insta.Layout.CusListView>
             </LinearLayout>
 
         </LinearLayout>

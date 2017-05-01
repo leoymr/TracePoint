@@ -6,12 +6,13 @@
 
     <ImageView
         android:id="@+id/registerUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:scaleType="fitXY"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:contentDescription="@string/login"
-        android:src="@mipmap/user_qq" />
+        android:src="@mipmap/icon" />
 
     <LinearLayout
         android:id="@+id/reg_linearlayout"
@@ -166,7 +167,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/reg_linearlayout"
         android:layout_margin="20dp"
-        android:background="@drawable/btn_bg"
+        android:background="@drawable/btn_bg_logout"
         android:includeFontPadding="false"
         android:text="@string/register"
         android:textColor="#ffffff"

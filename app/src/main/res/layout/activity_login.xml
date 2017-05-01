@@ -10,10 +10,10 @@
         android:id="@+id/loginUser"
         android:layout_width="70dp"
         android:layout_height="70dp"
+        android:scaleType="fitXY"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:contentDescription="@string/login"
-        android:scaleType="fitXY"
         android:src="@mipmap/icon" />
 
     <LinearLayout
