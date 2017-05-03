@@ -22,7 +22,10 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
     private static final String TAG = "MyFirebaseIIDService";
     private String refreshedToken;
 
-
+    /**
+     * 用于第一次安装apk，防止发送当前token id为空，
+     * 保存至文件中，在login页面的activity中读取
+     */
     @Override
     public void onTokenRefresh() {
         super.onTokenRefresh();
@@ -49,10 +52,5 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
             }
         }
     }
-
-
-
-
-
 
 }

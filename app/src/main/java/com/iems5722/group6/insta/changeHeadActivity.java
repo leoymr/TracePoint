@@ -30,6 +30,8 @@ import okhttp3.Response;
 
 /**
  * Created by leoymr on 23/4/17.
+ *
+ * 更换头像activity
  */
 
 public class changeHeadActivity extends AppCompatActivity {

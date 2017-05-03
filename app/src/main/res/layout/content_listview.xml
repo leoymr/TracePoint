@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_margin="10dp"
     android:descendantFocusability="blocksDescendants"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/fp_content_user_linearlayout"
@@ -25,44 +25,44 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginLeft="10dp"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/fp_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
+                android:text="friend_name"
                 android:textColor="#00688B"
-                android:text="friend_name" />
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/fp_content_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textSize="15dp"
+                android:text="trace content"
                 android:textColor="#000000"
-                android:text="trace content"/>
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/fp_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:textSize="12dp"
+                android:text="time"
                 android:textColor="#8F8F8F"
-                android:text="time" />
+                android:textSize="12dp" />
 
             <LinearLayout
+                android:id="@+id/comment_Linearlayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:id="@+id/comment_Linearlayout"
                 android:background="@mipmap/textview_input_left"
-                android:visibility="gone"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <com.iems5722.group6.insta.Layout.CusListView
                     android:id="@+id/fp_comment_listview"
@@ -76,24 +76,27 @@
 
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/good"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:scaleType="fitXY"
-            android:layout_marginLeft="5dp"
+        <com.like.LikeButton
+            android:id="@+id/heart_button"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="bottom"
-            android:src="@mipmap/collection" />
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            app:anim_scale_factor="3"
+            app:icon_size="22dp"
+            app:icon_type="heart" />
+
 
         <TextView
             android:id="@+id/like_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="2dp"
-            android:textSize="12dp"
-            android:textColor="#8F8F8F"
             android:layout_gravity="bottom"
-            android:text="+1" />
+            android:layout_marginLeft="2dp"
+            android:text="+1"
+            android:textColor="#8F8F8F"
+            android:textSize="12dp" />
 
     </LinearLayout>
 

@@ -1,17 +1,11 @@
 package com.iems5722.group6.insta;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -23,11 +17,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.iems5722.group6.insta.FirebaseService.MyFirebaseInstanceIDService;
-import com.iems5722.group6.insta.Layout.AndroidBug5497Workaround;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.iems5722.group6.insta.Layout.AndroidBug5497Workaround;
 
 import org.json.JSONObject;
 
@@ -46,6 +39,9 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+/**
+ * 登录界面activity
+ */
 public class loginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "login";
@@ -63,6 +59,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     private SharedPreferences.Editor editor;
     private CheckBox rememPwd;
 
+    //正则表达式验证邮箱密码
     private static Pattern pattern;
     private static Matcher matcher;
 
@@ -85,7 +82,8 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
 
         List<String> permissionList = new ArrayList<>();
 
-        //检测权限list，若无则添加
+        /* 提前询问权限，防止在主mapactivity页面报错
+        检测权限list，若无则添加 */
         if (ContextCompat.checkSelfPermission(loginActivity.this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             permissionList.add(android.Manifest.permission.ACCESS_FINE_LOCATION);
@@ -136,6 +134,10 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         register.setOnClickListener(this);
     }
 
+    /**
+     * 用于第一次安装apk，加载firebase获取的token id
+     * @return
+     */
     public String load() {
         FileInputStream in = null;
         BufferedReader reader = null;
@@ -174,6 +176,10 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         return true;
     }
 
+    /**
+     * 响应登录，注册按钮点击事件
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         user_email = editText_user_email.getText().toString();
@@ -190,6 +196,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                     //验证密码
                     Toast.makeText(loginActivity.this, "请输入6～20位，包含字母与数字的密码", Toast.LENGTH_SHORT).show();
                 } else {
+                    //记住密码
                     editor = preferences.edit();
                     if (rememPwd.isChecked()) {
                         editor.putBoolean("remember_password", true);
@@ -279,7 +286,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     /**
-     * 验证邮箱是否正确
+     * 验证邮箱
      *
      * @param email
      * @return
@@ -296,7 +303,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     /**
-     * 验证密码是否正确
+     * 验证密码
      *
      * @param pwd
      * @return

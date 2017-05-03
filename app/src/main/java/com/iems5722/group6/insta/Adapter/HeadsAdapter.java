@@ -50,6 +50,11 @@ public class HeadsAdapter extends RecyclerView.Adapter<HeadsAdapter.headViewHold
         this.mOnItemClickListener = listener;
     }
 
+    /**
+     * 响应 recyclerview item 点击事件
+     * @param holder
+     * @param position
+     */
     protected void initClick(headViewHolder holder, final int position) {
         //单击事件的回调
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +74,7 @@ public class HeadsAdapter extends RecyclerView.Adapter<HeadsAdapter.headViewHold
                 if (mOnItemClickListener != null) {
                     mOnItemClickListener.setOnLongItemClick(v, position);
                 }
-                return true; //注意：一定要返回true，这样可以消费事件，让点击事件不再生效
+                return true; //返回true，消费事件，让点击事件不再生效
             }
         });
     }

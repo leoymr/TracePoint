@@ -6,6 +6,8 @@ import java.util.HashMap;
 
 /**
  * Created by leoymr on 24/4/17.
+ *
+ * 头像资源hashmap
  */
 
 public class HeadHashMap {

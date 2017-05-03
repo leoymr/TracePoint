@@ -2,6 +2,8 @@ package com.iems5722.group6.insta.Data.footprint_Info;
 
 /**
  * Created by leoymr on 24/4/17.
+ *
+ * 个人中心页面的数据类
  */
 
 public class PersonalData {

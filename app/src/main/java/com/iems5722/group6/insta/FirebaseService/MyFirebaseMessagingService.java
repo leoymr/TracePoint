@@ -70,8 +70,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private void sendNotification(String headimg_name, String messageBody) {
         int requestCode = new Random().nextInt();
         int headResource = headList.get(headimg_name);
-        Bitmap bm = BitmapFactory.decodeResource(getResources(), headResource);
 
+        //让推送通知栏显示点赞、评论用户头像
+        Bitmap bm = BitmapFactory.decodeResource(getResources(), headResource);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         android.support.v4.app.NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)

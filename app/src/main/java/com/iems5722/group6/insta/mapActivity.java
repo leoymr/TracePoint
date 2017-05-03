@@ -70,6 +70,8 @@ import static com.iems5722.group6.insta.GpsClass.PositionUtil.gcj_To_Gps84;
 
 /**
  * Created by leoymr on 8/4/17.
+ *
+ * 主足迹页面
  */
 
 public class mapActivity extends AppCompatActivity implements TitlePopup.OnItemOnClickListener, View.OnClickListener {
@@ -77,9 +79,9 @@ public class mapActivity extends AppCompatActivity implements TitlePopup.OnItemO
     public LocationClient mLocationClient;
 
     private String TAG = "mapActivity";
-    private String POST = "POST like";
-    private String user_id_intent;
-    private String trace_id_intent;
+
+    private String user_id_intent;//存放当前用户id
+    private String trace_id_intent;//存放当前足迹id
 
     private ListView content_listView;
     private TitlePopup titlePopup;
@@ -106,9 +108,9 @@ public class mapActivity extends AppCompatActivity implements TitlePopup.OnItemO
 
     private int flag = 0;//悬浮按钮标志
     private int width, height;
-    private int[] pic = {R.id.center, R.id.addmore, R.id.refresh, R.id.checked};
-    private List<ImageView> imageViewList = new ArrayList<>();
-    private HashMap<String, Integer> headList = new HashMap<>();
+    private int[] pic = {R.id.center, R.id.addmore, R.id.refresh, R.id.checked};//悬浮按钮的图片资源
+    private List<ImageView> imageViewList = new ArrayList<>();//悬浮按钮的imageview
+    private HashMap<String, Integer> headList = new HashMap<>();//存放头像的hashmap
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -153,9 +155,8 @@ public class mapActivity extends AppCompatActivity implements TitlePopup.OnItemO
         //moments内容 listview
         content_listView = (ListView) findViewById(R.id.footprint_Listview);
 
-        titlePopup = new TitlePopup(this, Util.dip2px(this, 230), Util.dip2px(
+        titlePopup = new TitlePopup(this, Util.dip2px(this, 160), Util.dip2px(
                 this, 40));
-        titlePopup.addAction(new ActionItem(this, "like", R.mipmap.circle_praise));
         titlePopup.addAction(new ActionItem(this, "replay", R.mipmap.circle_comment));
         titlePopup.addAction(new ActionItem(this, "mark", R.mipmap.locate));
 
@@ -187,7 +188,6 @@ public class mapActivity extends AppCompatActivity implements TitlePopup.OnItemO
         super.onRestart();
         mapView.onResume();
         Log.d(TAG, "onRestart: ");
-        //new mapAsyncTask().execute();
     }
 
     @Override
@@ -204,6 +204,7 @@ public class mapActivity extends AppCompatActivity implements TitlePopup.OnItemO
         baiduMap.setMyLocationEnabled(false);
     }
 
+    //监听悬浮按钮点击事件
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -235,7 +236,7 @@ public class mapActivity extends AppCompatActivity implements TitlePopup.OnItemO
         }
 
     }
-
+    //悬浮按钮展开动画
     private void startAni() {
 
         for (int i = 1; i < pic.length; i++) {
@@ -252,7 +253,7 @@ public class mapActivity extends AppCompatActivity implements TitlePopup.OnItemO
         }
         flag = 1;
     }
-
+    //悬浮按钮收回动画
     private void closeAni() {
 
         for (int i = 1; i < pic.length; i++) {
@@ -276,7 +277,6 @@ public class mapActivity extends AppCompatActivity implements TitlePopup.OnItemO
      * <p>
      * 显示地图中当前位置
      */
-
     public class MyLocationListener implements BDLocationListener {
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
@@ -371,7 +371,11 @@ public class mapActivity extends AppCompatActivity implements TitlePopup.OnItemO
         }
     }
 
-    //Popup Window 点击事件
+    /**
+     * Popup Window 点击事件
+     * @param item
+     * @param position
+     */
     @Override
     public void onItemClick(ActionItem item, int position) {
         switch (position) {
@@ -388,11 +392,6 @@ public class mapActivity extends AppCompatActivity implements TitlePopup.OnItemO
                 baiduMap.addOverlay(options);
                 break;
             case 1:
-                Log.d(user_id_intent, " like " + trace_id_intent);
-                new mapAsyncTask().execute();
-                like_flag = true;
-                break;
-            case 2:
                 Intent intent_replay = new Intent(this, commentActivity.class);
                 intent_replay.putExtra("user_id", user_id_intent);
                 intent_replay.putExtra("trace_id", trace_id_intent);
@@ -401,26 +400,16 @@ public class mapActivity extends AppCompatActivity implements TitlePopup.OnItemO
         }
     }
 
-    //发送okhttp请求，异步操作
+    /**
+     * 发送okhttp请求，异步操作
+     */
     class mapAsyncTask extends AsyncTask<String, Void, JSONObject> {
 
         @Override
         protected JSONObject doInBackground(String... params) {
             JSONObject json = null;
-            if (like_flag == true) {
-                code_like = postRequestWithOkHttp();
-
-                //code_like=200 即用户未点赞
-                if (code_like == 200) {
-
-                    like_flag = false;
-                }
-                return null;
-
-            } else {
-                json = sendRequestWithOkHttp();
-                return json;
-            }
+            json = sendRequestWithOkHttp();
+            return json;
         }
 
         @Override
@@ -434,27 +423,7 @@ public class mapActivity extends AppCompatActivity implements TitlePopup.OnItemO
                     Log.d("onCreate: ", "not null");
                     content_listView.setAdapter(commentAdapter);
                 }
-            } else if (code_like == 200) {
-                commentAdapter = new CommentAdapter(mapActivity.this, content_infos);
-                if (content_infos != null) {
-                    Log.d("like success", "true");
-                    Toast.makeText(mapActivity.this, "赞+1", Toast.LENGTH_SHORT).show();
-                    int count = content_infos.get(position_like).getLikeNum();
-                    count++;
-                    content_infos.get(position_like).setLikeNum(count);
-                    if (!content_infos.get(position_like).isLikeFocus())
-                        content_infos.get(position_like).setLikeFocus(true);
-                    Log.d("like num ", String.valueOf(count));
-
-                    commentAdapter.notifyDataSetChanged();
-                    content_listView.setSelection(position_like);
-                }
-
-            } else if (code_like == 400) {
-                Log.d("popup: code_like", String.valueOf(code_like));
-                Toast.makeText(mapActivity.this, "点过赞了", Toast.LENGTH_SHORT).show();
             }
-
             //listview item点击事件
             content_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -558,6 +527,7 @@ public class mapActivity extends AppCompatActivity implements TitlePopup.OnItemO
                         //Log.d("like_user_id", user_id_like);
                         if (trace_id_like.equals(trace_id_content)) {
                             like_count++;
+                            //若like list中的user_id与当前user_id相同，则表示已点过赞
                             if (user_id_like.equals(user_id_intent)) {
                                 content.setLikeFocus(true);
                             } else {
@@ -577,7 +547,7 @@ public class mapActivity extends AppCompatActivity implements TitlePopup.OnItemO
         }
 
         /**
-         * Sending GET request with Okhttp
+         * 获取当前位置周围的所有足迹
          */
         private JSONObject sendRequestWithOkHttp() {
             Response response = null;
@@ -617,36 +587,7 @@ public class mapActivity extends AppCompatActivity implements TitlePopup.OnItemO
             return json;
         }
 
-        /**
-         * Sending POST request of  with Okhttp
-         */
-        private int postRequestWithOkHttp() {
-            JSONObject json = null;
-            int code = 0;
 
-            RequestBody requestBody = new FormBody.Builder()
-                    .add("trace_id", trace_id_intent)
-                    .add("user_id", user_id_intent)
-                    .build();
-            String url = "http://54.254.206.29/api/publish_like";
-            OkHttpClient client = new OkHttpClient();
-            Log.d(POST, url);
-            Request request = new Request.Builder()
-                    .url(url)
-                    .post(requestBody)
-                    .build();
-            try {
-                Response response = client.newCall(request).execute();
-                String responseData = response.body().string();
-                json = new JSONObject(responseData);
-                code = json.getInt("code");
-                Log.d(POST, String.valueOf(json.get("status")));
-            } catch (Exception e) {
-                e.printStackTrace();
-                Log.d(POST, "POST request error");
-            }
-            return code;
-        }
     }
 
 

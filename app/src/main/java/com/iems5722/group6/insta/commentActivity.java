@@ -23,6 +23,8 @@ import okhttp3.Response;
 
 /**
  * Created by leoymr on 23/4/17.
+ *
+ * 发表评论activity
  */
 
 public class commentActivity extends AppCompatActivity implements View.OnClickListener {

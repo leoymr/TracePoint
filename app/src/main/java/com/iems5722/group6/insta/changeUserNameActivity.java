@@ -24,6 +24,8 @@ import okhttp3.Response;
 
 /**
  * Created by leoymr on 24/4/17.
+ *
+ * 更换用户名activity
  */
 
 public class changeUserNameActivity extends AppCompatActivity implements View.OnClickListener {

@@ -8,6 +8,8 @@ import android.widget.FrameLayout;
 
 /**
  * Created by leoymr on 25/4/17.
+ *
+ * 自定义的处理edittext被软键盘遮挡类
  */
 
 public class AndroidBug5497Workaround {

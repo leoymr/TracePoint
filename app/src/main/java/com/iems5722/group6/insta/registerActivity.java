@@ -25,6 +25,8 @@ import okhttp3.Response;
 
 /**
  * Created by leoymr on 2/4/17.
+ *
+ * 注册页面activity
  */
 
 public class registerActivity extends AppCompatActivity implements View.OnClickListener {
@@ -41,6 +43,7 @@ public class registerActivity extends AppCompatActivity implements View.OnClickL
     private String user_name;
     private String user_pw;
 
+    //正则表达式验证邮箱、用户名和密码
     private static Pattern pattern;
     private static Matcher matcher;
 

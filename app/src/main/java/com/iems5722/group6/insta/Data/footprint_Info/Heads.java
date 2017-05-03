@@ -2,6 +2,8 @@ package com.iems5722.group6.insta.Data.footprint_Info;
 
 /**
  * Created by leoymr on 23/4/17.
+ *
+ * 头像数据类
  */
 
 public class Heads {

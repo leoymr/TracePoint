@@ -47,6 +47,8 @@ import static com.iems5722.group6.insta.GpsClass.PositionUtil.gcj02_To_Bd09;
 
 /**
  * Created by leoymr on 21/4/17.
+ *
+ * 发布新足迹页面activity
  */
 
 public class publishActivity extends AppCompatActivity implements View.OnClickListener {
@@ -74,7 +76,6 @@ public class publishActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         setTitle("发布足迹");
-
 
         //地理位置服务
         mLocationClient = new LocationClient(getApplicationContext());
@@ -215,7 +216,6 @@ public class publishActivity extends AppCompatActivity implements View.OnClickLi
                     bdLocation.getLocType() == BDLocation.TypeNetWorkLocation) {
                 navigateTo(bdLocation);
             }
-
         }
 
         @Override
@@ -245,7 +245,6 @@ public class publishActivity extends AppCompatActivity implements View.OnClickLi
             default:
         }
     }
-
 
     @Override
     public void onClick(View v) {

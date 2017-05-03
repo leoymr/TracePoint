@@ -2,6 +2,8 @@ package com.iems5722.group6.insta.Data.footprint_Info;
 
 /**
  * Created by leoymr on 15/4/17.
+ *
+ * 主页面子listview（评论list）的数据类
  */
 
 public class comment_Info {

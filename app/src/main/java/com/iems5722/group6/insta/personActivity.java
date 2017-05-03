@@ -32,6 +32,8 @@ import okhttp3.Response;
 
 /**
  * Created by leoymr on 23/4/17.
+ *
+ * 个人管理页面activity
  */
 
 public class personActivity extends AppCompatActivity implements View.OnClickListener {
@@ -55,7 +57,6 @@ public class personActivity extends AppCompatActivity implements View.OnClickLis
 
         setTitle("个人中心");
 
-
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         HeadHashMap headmap = new HeadHashMap();
@@ -71,6 +72,11 @@ public class personActivity extends AppCompatActivity implements View.OnClickLis
         new personAsyncTask().execute();
     }
 
+    /**
+     * 处理返回按钮响应事件，传递user_id参数
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

@@ -4,6 +4,8 @@ import java.util.List;
 
 /**
  * Created by leoymr on 15/4/17.
+ *
+ * 主页面listview数据类
  */
 
 public class content_Info {

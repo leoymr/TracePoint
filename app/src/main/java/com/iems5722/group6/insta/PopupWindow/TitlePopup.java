@@ -84,10 +84,8 @@ public class TitlePopup extends PopupWindow {
         setContentView(view);
         Log.e("",
                 "3333==========" + view.getHeight() + "    " + view.getWidth());
-        priase = (TextView) view.findViewById(R.id.popu_like);
         comment = (TextView) view.findViewById(R.id.popu_comment);
         mark = (TextView) view.findViewById(R.id.popu_mark);
-        priase.setOnClickListener(onclick);
         comment.setOnClickListener(onclick);
         mark.setOnClickListener(onclick);
     }
@@ -101,7 +99,7 @@ public class TitlePopup extends PopupWindow {
         // 设置矩形的大小
         mRect.set(mLocation[0], mLocation[1], mLocation[0] + c.getWidth(),
                 mLocation[1] + c.getHeight());
-        priase.setText(mActionItems.get(0).mTitle);
+        //priase.setText(mActionItems.get(0).mTitle);
         // 判断是否需要添加或更新列表子类项
         if (mIsDirty) {
             // populateActions();
@@ -124,9 +122,6 @@ public class TitlePopup extends PopupWindow {
             dismiss();
             switch (v.getId()) {
                 case R.id.popu_comment:
-                    mItemOnClickListener.onItemClick(mActionItems.get(2), 2);
-                    break;
-                case R.id.popu_like:
                     mItemOnClickListener.onItemClick(mActionItems.get(1), 1);
                     break;
                 case R.id.popu_mark:

@@ -54,6 +54,7 @@ import static com.iems5722.group6.insta.GpsClass.PositionUtil.gcj02_To_Bd09;
 
 /**
  * Created by leoymr on 24/4/17.
+ * 个人足迹页面
  */
 
 public class albumActivity extends AppCompatActivity {
@@ -94,8 +95,6 @@ public class albumActivity extends AppCompatActivity {
         baiduMap = mapView.getMap();
         baiduMap.setMyLocationEnabled(false);
         mapView.removeViewAt(1);
-        /*UiSettings uiSettings = baiduMap.getUiSettings();
-        uiSettings.setAllGesturesEnabled(false);*/
 
         // 设置marker图标
         bitmap = BitmapDescriptorFactory.fromResource(R.mipmap.t_icon);

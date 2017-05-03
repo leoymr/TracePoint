@@ -14,6 +14,8 @@ import java.util.List;
 
 /**
  * Created by leoymr on 15/4/17.
+ *
+ * 自定义的listview嵌套listview类
  */
 
 public class CusListView extends LinearLayout {
